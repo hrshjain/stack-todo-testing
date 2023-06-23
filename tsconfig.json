@@ -1,0 +1,11 @@
+{
+    // "extends": "@tsconfig/node-lts/tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "resolveJsonModule": true,
+        "strict": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "allowSyntheticDefaultImports": true
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "user1": {
+        "email": "sampleuser@example.com"
+    },
+    "user2": {
+        "email": "sampleuser2@example.com"
+    },
+    "user3": {
+        "email": "sampleuser3@example.com"
+    },
+    "user4": {
+        "email": "sampleuser4@example.com"
+    }
+}
