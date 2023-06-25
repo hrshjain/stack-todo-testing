@@ -5,8 +5,7 @@ import { AddTaskPage } from '../../pages/task-managament/add-task-page';
 import { MyTasksPage } from '../../pages/task-managament/my-tasks-page';
 import { ViewTaskPage } from '../../pages/task-managament/view-task-page';
 import { EditTaskPage } from '../../pages/task-managament/edit-task-page';
-import users from '../../test-data/users/users.json';
-
+import tasks  from '../../test-data/tasks/tasks.json'
 
 test.describe("CRUD Operations for StackTodo Application", () => {
 
@@ -16,7 +15,7 @@ test.describe("CRUD Operations for StackTodo Application", () => {
     await test.step("1: User logs into stacktodo testing", async() => {
       const loginPage = new LoginPage(page);
       await loginPage.goto();
-      await loginPage.enterCredentials();
+      await loginPage.enterCredentials(process.env.USER1_LOGIN_ID, process.env.USER1_LOGIN_PASSWORD);
       await loginPage.clickSignInButton();
     })
 
@@ -30,14 +29,14 @@ test.describe("CRUD Operations for StackTodo Application", () => {
     // enter the tasks details and save task
     await test.step("3: User enters details of the task and clicks save button", async() => {
       const addTaskPage = new AddTaskPage(page);
-      await addTaskPage.enterTaskData();
+      await addTaskPage.enterTaskData(tasks.task1.data);
       await addTaskPage.clickSaveTaskButton();
     })
 
     // view the task just created
     await test.step("4: User verifies that the task is created in my tasks page", async() => {
       const myTasksPage = new MyTasksPage(page);
-      await myTasksPage.viewSpecificTask("abc");
+      await myTasksPage.findSpecificTask(tasks.task1.data);
     })
   });
 
@@ -48,25 +47,21 @@ test.describe("CRUD Operations for StackTodo Application", () => {
     await test.step("1: User logs into stacktodo testing", async() => {
       const loginPage = new LoginPage(page);
       await loginPage.goto();
-      await loginPage.enterCredentials();
+      await loginPage.enterCredentials(process.env.USER2_LOGIN_ID, process.env.USER2_LOGIN_PASSWORD);
       await loginPage.clickSignInButton();
     })
 
     // view the task in my tasks page
-    await test.step("2: User verifies that the task is created in my tasks page", async() => {
+    await test.step("2: User verifies that the task is created in my tasks and clicks on view button", async() => {
       const myTasksPage = new MyTasksPage(page);
-      await myTasksPage.viewSpecificTask("abc");
-      await myTasksPage.getTaskList();
-      await myTasksPage.verifySpecificTaskExistsInMyTasks("task");
+      await myTasksPage.findSpecificTask(tasks.task2.data);
+      await myTasksPage.viewSpecificTask(tasks.task2.data);
     })
 
     // verfiy the task data in the view task page
     await test.step("3: User verifies the task data is as expected", async() => {
       const viewTaskPage = new ViewTaskPage(page);
-      await viewTaskPage.getTaskBody();
-      await viewTaskPage.verifyTaskBody("sample task");
-      await viewTaskPage.getTaskLastUpdated();
-      await viewTaskPage.verifyTaskLastUpdated("sample task");
+      await viewTaskPage.verifyTaskBody(tasks.task2.data);
     })
   });
 

@@ -2,6 +2,7 @@
     // "extends": "@tsconfig/node-lts/tsconfig.json",
     "compilerOptions": {
         "baseUrl": ".",
+        "esModuleInterop": true,
         "resolveJsonModule": true,
         "strict": true,
         "noFallthroughCasesInSwitch": true,
