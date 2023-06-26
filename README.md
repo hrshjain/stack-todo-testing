@@ -16,9 +16,9 @@
 
 We can use a separate database instance or use a specific naming convention for the test data to differentiate it from production data. By pre-loading the database with relevant test data, you can avoid the need to create the same data for each test case. 
 
-### Bug ###
+### Issue ###
 
-The delete operation is not working using Playwright
+The delete operation can be done manually but is not working using Playwright locator and methods. This will need more investigation.
 
 ### Set Up ###
 
