@@ -34,9 +34,7 @@ The delete operation is not working using Playwright
 
     https://git-scm.com/downloads
 
-4. Open git bash and clone the saas-protect-testing repository from the Bitbucket.
-    
-    BitBucket Repo: https://bitbucket.org/asigra/saas-protect-testing/src/master/
+4. Open git bash and clone git repo
 
     ```
     git clone <Repository Link>
