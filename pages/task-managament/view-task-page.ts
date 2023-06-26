@@ -10,21 +10,8 @@ export class ViewTaskPage {
 
     this.taskBody = this.page.locator('.card-body .card-text')
   }
-
-  async getTaskBody(){
-  }
   
   async verifyTaskBody(task: string){
     await expect(this.taskBody).toHaveText(task);
   }
-
-  
-  async getTaskLastUpdated(){
-    
-  }
-
-  async verifyTaskLastUpdated(task){
-    
-  }
-
 }

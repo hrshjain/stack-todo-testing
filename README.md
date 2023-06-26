@@ -16,6 +16,10 @@
 
 We can use a separate database instance or use a specific naming convention for the test data to differentiate it from production data. By pre-loading the database with relevant test data, you can avoid the need to create the same data for each test case. 
 
+### Bug ###
+
+The delete operation is not working using Playwright
+
 ### Set Up ###
 
 1. Download Visual Studio Code

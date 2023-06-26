@@ -5,10 +5,20 @@
     "task2": {
         "data": "Sample task for View Operarion"
     },
-    "task3": {
-        "data": "Sample task 3"
+    "task3_original": {
+        "data": "Sample task for Edit operation"
+    },
+    "task3_new": {
+        "data": "Updated New - Sample task for Edit operation"
     },
     "task4": {
-        "data": "Sample task 4"
+        "data": "Sample task for delete operation"
+    },
+    "task_list": ["Sample task 1", "Sample task 2", "Sample task 3", "Sample task 4"],
+    "task_list_user6": {
+        "task1": "Sample task 1",
+        "task2": "Sample task 2",
+        "task3": "Sample task 3"
     }
+
 }

@@ -12,20 +12,12 @@ export class MyTasksPage {
     this.taskListWithButtons = this.page.locator('tbody tr')
   }
 
-  async goto(){
-
+  async verifyTaskList(tasks: string[]){
+   expect(await this.taskList.allTextContents()).toEqual(tasks);
   }
 
-  async getTaskList(){
-    
-  }
-
-  async verifyTaskList(){
-    
-  }
-
-  async verifySpecificTasksDoNotExistsInMyTasks(task){
-    
+  async verifySpecificTasksDoNotExistsInMyTasks(task: string){
+    expect(await this.taskList.allTextContents()).not.toContain(task);
   }
 
   async findSpecificTask(task: string){
@@ -38,11 +30,18 @@ export class MyTasksPage {
                             .click({ force: true });
   }
 
-  async editSpecificTask(task){
-
+  async editSpecificTask(task: string){
+    this.taskListWithButtons.filter({ hasText: task })
+                            .getByRole('link', { name: 'Edit' })
+                            .click({ force: true });
   }
 
-  async deleteSpecificTask(task){
+  async deleteSpecificTask(task: string){
+    this.taskListWithButtons.filter({ hasText: task })
+                            .locator('.btn.btn-outline-danger')
+                            .click();
 
+  
   }
+
 }

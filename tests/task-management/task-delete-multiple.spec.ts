@@ -1,47 +1,40 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/login/login-page';
-import { HomePage } from '../../pages/home/home-page';
-import { AddTaskPage } from '../../pages/task-managament/add-task-page';
 import { MyTasksPage } from '../../pages/task-managament/my-tasks-page';
-import { ViewTaskPage } from '../../pages/task-managament/view-task-page';
-import { EditTaskPage } from '../../pages/task-managament/edit-task-page';
-
+import tasks  from '../../test-data/tasks/tasks.json'
 
 test.describe("Delete 2 or more tasks and verify remaining tasks", () => {
+  test('Deleting two or more tasks belonging to an user results in only one task being left\
+        displayed on the task table', async ({ page }) => {
+    /** Precondition:  an existing task is present in the application using db:migrate/API/UI */
 
-  test('Delete 2 tasks and verify remaining tasks are displayed in My tasks List', async ({ page }) => {
-    /**  Precondition: a list of 10 tasks exist in the application */
+   // navigate and login into stack to do application
+   await test.step("1: User logs into stacktodo testing", async() => {
+     const loginPage = new LoginPage(page);
+     await loginPage.goto();
+     await loginPage.enterCredentials(process.env.USER6_LOGIN_ID, process.env.USER6_LOGIN_PASSWORD);
+     await loginPage.clickSignInButton();
+   })
 
-    // navigate and login into stack to do application
-    await test.step("1: User logs into stacktodo testing", async() => {
-      const loginPage = new LoginPage(page);
-      await loginPage.goto();
-      await loginPage.enterCredentials();
-      await loginPage.clickSignInButton();
-    })
+   // delete two tasks in my tasks page
+   await test.step("2: User deletes two specific tasks ", async() => {
+     const myTasksPage = new MyTasksPage(page);
+     await myTasksPage.deleteSpecificTask(tasks.task_list_user6.task1);
+     await myTasksPage.deleteSpecificTask(tasks.task_list_user6.task2);
+   })
+   
+   // verify two tasks are deleted from my tasks page
+   await test.step("3: User verifies the two task are deleted from My tasks page ", async() => {
+     const myTasksPage = new MyTasksPage(page);
+     await myTasksPage.verifySpecificTasksDoNotExistsInMyTasks(tasks.task_list_user6.task1);
+     await myTasksPage.verifySpecificTasksDoNotExistsInMyTasks(tasks.task_list_user6.task2);
+   })
 
-    // verify all the existing tasks are present in my tasks page
-    await test.step("2: User verifies all the existing tasks are present in My tasks page ", async() => {
+     // verify the task 3 is not deleted from my tasks page
+     await test.step("3: User verifies the two task are deleted from My tasks page ", async() => {
       const myTasksPage = new MyTasksPage(page);
-      await myTasksPage.verifySpecificTasksDoNotExistsInMyTasks("abc");
+      await myTasksPage.findSpecificTask(tasks.task_list_user6.task3);
     })
+ });
 
-    // delete (n -1) task in my tasks page
-    await test.step("3: User selects and deletes a specific task ", async() => {
-      const myTasksPage = new MyTasksPage(page);
-      await myTasksPage.deleteSpecificTask("abc");
-    })
-
-    // verify the tasks are deleted 
-    await test.step("4: User verifies the task is deleted from My tasks page ", async() => {
-      const myTasksPage = new MyTasksPage(page);
-      await myTasksPage.verifySpecificTasksDoNotExistsInMyTasks("abc");
-    })
-
-    // verify the remaining task in my tasks page
-    await test.step("5: User verifies remaining task is not deleted from My tasks page ", async() => {
-      const myTasksPage = new MyTasksPage(page);
-      await myTasksPage.verifySpecificTaskExistsInMyTasks("abc");
-    })
-  });
 });
