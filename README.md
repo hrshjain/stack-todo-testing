@@ -1,21 +1,5 @@
 # stacktodo-testing
 
-### Question 3 Part II: Architect a Solution to pre-load db with relevant data  ###
-
-1. Create a script or a function specifically for pre-loading the database with test data. 
-
-2. Establish a connection to the database.
-
-3. Define the data we want to pre-load. This could include sample todo items, users, or any other data that the application uses.
-
-4. Use the database connection to insert the test data into the appropriate tables. You can write SQL queries directly or  library like SQLAlchemy.
-
-5. After inserting the test data, close the database connection.
-
-6. In your test setup, run the pre-loading script or function to ensure the database is populated before running the tests.
-
-We can use a separate database instance or use a specific naming convention for the test data to differentiate it from production data. By pre-loading the database with relevant test data, you can avoid the need to create the same data for each test case. 
-
 ### Issue ###
 
 The delete operation can be done manually but is not working using Playwright locator and methods. This will need more investigation.
